@@ -214,6 +214,22 @@ Configuration is stored in `~/.go-code/config.json`:
 - `qwen2.5-coder-32b-instruct` - Optimized for code generation
 - `mixtral-8x7b-32768` - Good balance of speed and capability
 - `gemma2-9b-it` - Efficient for general tasks
+- `openai/gpt-oss-120b` - OpenAI's new open-source model (use with `--gpt-oss-120b` flag)
+
+### Using OpenAI GPT-OSS-120B Model
+
+To use the new OpenAI GPT-OSS-120B model, add the `--gpt-oss-120b` flag to any command:
+
+```bash
+# Chat with agents using the new OpenAI model
+go-code --gpt-oss-120b chat @planner "Plan a microservices architecture"
+go-code --gpt-oss-120b chat @frontend "Create a React component"
+
+# Build projects with the new OpenAI model
+go-code --gpt-oss-120b build "a todo app with React frontend"
+```
+
+The `--gpt-oss-120b` flag overrides all agent model configurations to use `openai/gpt-oss-120b` via Groq's API.
 
 ## 🔒 Security Features
 

@@ -198,6 +198,8 @@ func isValidModel(model string) bool {
 		"meta-llama/llama-4-scout-17b-16e-instruct",
 		"moonshotai/kimi-k2-instruct",
 		"qwen/qwen3-32b",
+		// OpenAI models on Groq
+		"openai/gpt-oss-120b",
 	}
 
 	for _, validModel := range validModels {

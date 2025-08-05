@@ -9,6 +9,7 @@ import (
 )
 
 var cfgFile string
+var useGptOss120b bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -46,6 +47,7 @@ func init() {
 	// will be global for your application.
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-code/config.json)")
+	rootCmd.PersistentFlags().BoolVar(&useGptOss120b, "gpt-oss-120b", false, "Use the new OpenAI GPT-OSS-120B model")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -74,4 +76,9 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
+}
+
+// IsGptOss120bEnabled returns whether the --gpt-oss-120b flag is set
+func IsGptOss120bEnabled() bool {
+	return useGptOss120b
 }

@@ -144,6 +144,7 @@ func GetAvailableModels() []string {
 		"qwen2.5-coder-32b-instruct",
 		"llama3-groq-70b-8192-tool-use-preview",
 		"llama3-groq-8b-8192-tool-use-preview",
+		"openai/gpt-oss-120b",
 	}
 }
 

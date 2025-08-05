@@ -11,6 +11,7 @@ import (
 	"go-code/internal/config"
 	"go-code/internal/orchestrator"
 	"go-code/internal/ui"
+	"go-code/pkg/models"
 )
 
 // buildCmd auto-coordinates agents to build a feature
@@ -35,6 +36,22 @@ Examples:
 		}
 
 		cfg := manager.GetConfig()
+		
+		// Override model if --gpt-oss-120b flag is set
+		if IsGptOss120bEnabled() {
+			// Create a copy of the config and override all agent models
+			configCopy := *cfg
+			agentPrefs := make(map[models.AgentType]models.AgentConfig)
+			for agentType, agentConfig := range cfg.AgentPreferences {
+				newConfig := agentConfig
+				newConfig.Model = "openai/gpt-oss-120b"
+				agentPrefs[agentType] = newConfig
+			}
+			configCopy.AgentPreferences = agentPrefs
+			configCopy.DefaultModel = "openai/gpt-oss-120b"
+			cfg = &configCopy
+		}
+		
 		if err := manager.ValidateConfig(); err != nil {
 			fmt.Fprintf(os.Stderr, "Configuration error: %v\n", err)
 			os.Exit(1)
